@@ -3,7 +3,6 @@ package capteur
 import (
 	. "github.com/pspaces/gospace"
 	"math/rand"
-	_ "math/rand"
 )
 
 func Capteur_co(ts *Space) {
