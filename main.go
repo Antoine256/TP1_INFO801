@@ -2,17 +2,22 @@ package main
 
 import "fmt"
 import . "github.com/pspaces/gospace"
+import . "TP1_INFO801/agents/capteur"
 
 func main() {
-	inbox := NewSpace("space")
+	ts := NewSpace("ts")
+
+	go Capteur_ch4(&ts)
+	go Capteur_co(&ts)
+	go Capteur_h2o(&ts)
 
 	// Put a message into the space.
-	inbox.Put("Hello world!")
+	ts.Put("Hello world!")
 
 	// Get a message from the space
 	// via pattern matching.
 	var message string
-	t, _ := inbox.Get(&message)
+	t, _ := ts.Get(&message)
 
 	fmt.Println((t.GetFieldAt(0)).(string))
 }
