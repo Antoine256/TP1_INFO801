@@ -17,6 +17,9 @@ func main() {
 	var etatVentilateur string
 	ts := NewSpace("ts")
 
+	ts.Put("detection_gaz_haut")
+	ts.Put("detection_h2o_haut")
+	
 	wg.Add(10) // Attendre que tous les processus en parallèle se lancent
 
 	go capteur.Capteur_ch4(&ts)
@@ -26,8 +29,8 @@ func main() {
 	go gaz.Gaz_bas(&ts, 50.0, 50.0)
 	go gaz.H2o_bas(&ts, 50.0)
 	go gaz.H2o_haut(&ts, 50.0)
-	go pompe.Pompe(&ts, etatPompe)
-	go ventilateur.Ventilateur(&ts, etatVentilateur)
+	go pompe.Pompe(&ts, &etatPompe)
+	go ventilateur.Ventilateur(&ts, &etatVentilateur)
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
 
 	wg.Wait()

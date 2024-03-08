@@ -5,17 +5,19 @@ import (
 	. "github.com/pspaces/gospace"
 )
 
-func Pompe(ts *Space, etat string) {
+func Pompe(ts *Space, etat *string) {
 	fmt.Print("Pompe\n")
 	_, errActivation := ts.Get("activation_pompe")
 	_, errDesactivation := ts.Get("desactivation_pompe")
 	if errActivation == nil {
 		fmt.Println("Pompe activée")
-		Pompe(ts, "activée")
+		*etat = "activée"
+		Pompe(ts, etat)
 	}
 	if errDesactivation == nil {
 		fmt.Println("Pompe désactivée")
-		Pompe(ts, "désactivée")
+		*etat = "desactivée"
+		Pompe(ts, etat)
 	}
 	Pompe(ts, etat)
 }
