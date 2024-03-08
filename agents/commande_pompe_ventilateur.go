@@ -1,8 +1,12 @@
 package agents
 
-import . "github.com/pspaces/gospace"
+import (
+	"fmt"
+	. "github.com/pspaces/gospace"
+)
 
 func Commande_pompe_ventilateur(ts *Space, seuil_ch4 float64, seuil_co float64) {
+	fmt.Print("Commande_pompe_ventilateur\n")
 	var x float64
 	var y float64
 	ts.Get("H2o_haut_detect")

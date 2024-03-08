@@ -1,8 +1,12 @@
 package gaz
 
-import . "github.com/pspaces/gospace"
+import (
+	"fmt"
+	. "github.com/pspaces/gospace"
+)
 
 func H2o_bas(ts *Space, seuil_h2o_bas float64) {
+	fmt.Print("H2o_bas\n")
 	var x float64
 	ts.Query("detection_h2o_bas")
 	ts.Get("niveau_h2o", &x)

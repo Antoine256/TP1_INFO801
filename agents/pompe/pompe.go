@@ -6,6 +6,7 @@ import (
 )
 
 func Pompe(ts *Space, etat string) {
+	fmt.Print("Pompe\n")
 	_, errActivation := ts.Get("activation_pompe")
 	_, errDesactivation := ts.Get("desactivation_pompe")
 	if errActivation == nil {

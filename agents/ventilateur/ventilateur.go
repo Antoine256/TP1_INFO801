@@ -6,6 +6,7 @@ import (
 )
 
 func Ventilateur(ts *Space, etat string) {
+	fmt.Print("Ventilateur\n")
 	_, errActivation := ts.Get("activation_ventilateur")
 	_, errDesactivation := ts.Get("desactivation_ventilateur")
 	if errActivation == nil {
