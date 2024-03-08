@@ -6,11 +6,20 @@ import (
 	"TP1_INFO801/agents/gaz"
 	"TP1_INFO801/agents/pompe"
 	"TP1_INFO801/agents/ventilateur"
+	"fmt"
 	"sync"
+	"time"
 )
 import . "github.com/pspaces/gospace"
 
 var wg sync.WaitGroup
+
+func printEtat(etatPompe *string, etatVentilateur *string) {
+	fmt.Println("Pompe : " + *etatPompe)
+	fmt.Println("Ventilateur : " + *etatVentilateur)
+	time.Sleep(5 * time.Second)
+	printEtat(etatPompe, etatVentilateur)
+}
 
 func main() {
 	var etatPompe string
@@ -19,8 +28,8 @@ func main() {
 
 	ts.Put("detection_gaz_haut")
 	ts.Put("detection_h2o_haut")
-	
-	wg.Add(10) // Attendre que tous les processus en parallèle se lancent
+
+	wg.Add(11) // Attendre que tous les processus en parallèle se lancent
 
 	go capteur.Capteur_ch4(&ts)
 	go capteur.Capteur_co(&ts)
@@ -32,6 +41,8 @@ func main() {
 	go pompe.Pompe(&ts, &etatPompe)
 	go ventilateur.Ventilateur(&ts, &etatVentilateur)
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
+
+	go printEtat(&etatPompe, &etatVentilateur)
 
 	wg.Wait()
 }
