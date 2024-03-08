@@ -5,9 +5,9 @@ import . "github.com/pspaces/gospace"
 func Gaz_bas(ts *Space, seuil_ch4 float64, seuil_co float64) {
 	var y float64
 	var z float64
-	ts.Get("detection_h2o_bas")
-	ts.Get("niveau_ch4", &y)
-	ts.Get("niveau_co", &z)
+	ts.Query("detection_gaz_bas")
+	ts.Query("niveau_ch4", &y)
+	ts.Query("niveau_co", &z)
 	if y < seuil_ch4 && z < seuil_co {
 		ts.Put("activation_pompe")
 		ts.Put("detection_h2o_bas")
