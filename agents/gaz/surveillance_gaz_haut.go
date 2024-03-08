@@ -16,7 +16,7 @@ func Surveillance_gaz_haut(ts *Space, seuil_ch4 float64, seuil_co float64) {
 		Surveillance_gaz_haut(ts, seuil_ch4, seuil_co)
 	} else {
 		ts.Put("activation_ventilateur")
-		ts.Get("detection_gaz_haut")
+		//ts.Get("detection_gaz_haut")
 		Surveillance_gaz_haut(ts, seuil_ch4, seuil_co)
 	}
 }
