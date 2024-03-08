@@ -6,13 +6,18 @@ import (
 	"TP1_INFO801/agents/gaz"
 	"TP1_INFO801/agents/pompe"
 	"TP1_INFO801/agents/ventilateur"
+	"sync"
 )
 import . "github.com/pspaces/gospace"
+
+var wg sync.WaitGroup
 
 func main() {
 	var etatPompe string
 	var etatVentilateur string
 	ts := NewSpace("ts")
+
+	wg.Add(10) // Attendre que tous les processus en parallèle se lancent
 
 	go capteur.Capteur_ch4(&ts)
 	go capteur.Capteur_co(&ts)
@@ -24,4 +29,6 @@ func main() {
 	go pompe.Pompe(&ts, etatPompe)
 	go ventilateur.Ventilateur(&ts, etatVentilateur)
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
+
+	wg.Wait()
 }
