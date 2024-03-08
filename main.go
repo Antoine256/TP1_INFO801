@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"TP1_INFO801/agents/gaz"
+	"fmt"
+)
 import . "github.com/pspaces/gospace"
 import . "TP1_INFO801/agents/capteur"
 
@@ -10,6 +13,8 @@ func main() {
 	go Capteur_ch4(&ts)
 	go Capteur_co(&ts)
 	go Capteur_h2o(&ts)
+	go gaz.Surveillance_gaz_haut(&ts, 50, 50)
+	go gaz.H2o_bas(&ts, 50)
 
 	// Put a message into the space.
 	ts.Put("Hello world!")
