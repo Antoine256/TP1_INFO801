@@ -2,19 +2,22 @@ package main
 
 import (
 	"TP1_INFO801/agents/gaz"
+	"TP1_INFO801/agents/capteur"
+	"TP1_INFO801/agents/pompe"
 	"fmt"
 )
 import . "github.com/pspaces/gospace"
-import . "TP1_INFO801/agents/capteur"
 
 func main() {
+	var etatPompe string
 	ts := NewSpace("ts")
 
-	go Capteur_ch4(&ts)
-	go Capteur_co(&ts)
-	go Capteur_h2o(&ts)
 	go gaz.Surveillance_gaz_haut(&ts, 50, 50)
 	go gaz.H2o_bas(&ts, 50)
+	go capteur.Capteur_ch4(&ts)
+	go capteur.Capteur_co(&ts)
+	go capteur.Capteur_h2o(&ts)
+	go pompe.Pompe(&ts, etatPompe)
 
 	// Put a message into the space.
 	ts.Put("Hello world!")
