@@ -14,6 +14,9 @@ func get_valeur_h2o(etatPompe string) float64 {
 	switch etatPompe {
 	case "activée":
 		valeur_H2O -= rand.Float64() * 5
+		if valeur_H2O < 0.0 {
+			valeur_H2O = 0.0
+		}
 		return valeur_H2O
 	default:
 		valeur_H2O += rand.Float64() * 3
