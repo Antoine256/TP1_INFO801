@@ -14,16 +14,17 @@ import . "github.com/pspaces/gospace"
 
 var wg sync.WaitGroup
 
-func printEtat(etatPompe *string, etatVentilateur *string) {
-	fmt.Println("Pompe : " + *etatPompe)
-	fmt.Println("Ventilateur : " + *etatVentilateur)
+var etatPompe string
+var etatVentilateur string
+
+func printEtat() {
+	fmt.Println("Pompe : " + etatPompe)
+	fmt.Println("Ventilateur : " + etatVentilateur)
 	time.Sleep(5 * time.Second)
-	printEtat(etatPompe, etatVentilateur)
+	printEtat()
 }
 
 func main() {
-	var etatPompe string
-	var etatVentilateur string
 	ts := NewSpace("ts")
 
 	ts.Put("detection_gaz_haut")
@@ -31,9 +32,9 @@ func main() {
 
 	wg.Add(11) // Attendre que tous les processus en parallèle se lancent
 
-	go capteur.Capteur_ch4(&ts)
-	go capteur.Capteur_co(&ts)
-	go capteur.Capteur_h2o(&ts)
+	go capteur.Capteur_ch4(&ts, &etatVentilateur)
+	go capteur.Capteur_co(&ts, &etatVentilateur)
+	go capteur.Capteur_h2o(&ts, &etatPompe)
 	go gaz.Surveillance_gaz_haut(&ts, 50.0, 50.0)
 	go gaz.Gaz_bas(&ts, 50.0, 50.0)
 	go gaz.H2o_bas(&ts, 50.0)
@@ -42,7 +43,7 @@ func main() {
 	go ventilateur.Ventilateur(&ts, &etatVentilateur)
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
 
-	go printEtat(&etatPompe, &etatVentilateur)
+	go printEtat()
 
 	wg.Wait()
 }
