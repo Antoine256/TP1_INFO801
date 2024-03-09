@@ -1,6 +1,7 @@
 package capteur
 
 import (
+	"TP1_INFO801/global"
 	"fmt"
 	. "github.com/pspaces/gospace"
 	"math/rand"
@@ -24,6 +25,6 @@ func Capteur_co(ts *Space, etatVentilateur *string) {
 	valeur_CO := get_valeur_co(*etatVentilateur)
 	ts.Put("niveau_co", valeur_CO)
 	fmt.Print("Capteur_co: ", valeur_CO, "\n")
-	time.Sleep(5 * time.Second)
+	time.Sleep(global.WaitTime)
 	Capteur_co(ts, etatVentilateur)
 }

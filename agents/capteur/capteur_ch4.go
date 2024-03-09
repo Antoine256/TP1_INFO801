@@ -1,6 +1,7 @@
 package capteur
 
 import (
+	"TP1_INFO801/global"
 	"fmt"
 	. "github.com/pspaces/gospace"
 	"math/rand"
@@ -24,6 +25,6 @@ func Capteur_ch4(ts *Space, etatVentilateur *string) {
 	valeur_CH4 := get_valeur_ch4(*etatVentilateur)
 	ts.Put("niveau_ch4", valeur_CH4)
 	fmt.Print("Capteur_ch4: ", valeur_CH4, "\n")
-	time.Sleep(5 * time.Second)
+	time.Sleep(global.WaitTime)
 	Capteur_ch4(ts, etatVentilateur)
 }

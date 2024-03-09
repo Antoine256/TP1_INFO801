@@ -6,6 +6,7 @@ import (
 	"TP1_INFO801/agents/gaz"
 	"TP1_INFO801/agents/pompe"
 	"TP1_INFO801/agents/ventilateur"
+	"TP1_INFO801/global"
 	"fmt"
 	"sync"
 	"time"
@@ -20,7 +21,7 @@ var etatVentilateur string
 func printEtat() {
 	fmt.Println("Pompe : " + etatPompe)
 	fmt.Println("Ventilateur : " + etatVentilateur)
-	time.Sleep(5 * time.Second)
+	time.Sleep(global.WaitTime)
 	printEtat()
 }
 

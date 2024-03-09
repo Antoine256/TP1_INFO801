@@ -1,6 +1,7 @@
 package capteur
 
 import (
+	"TP1_INFO801/global"
 	"fmt"
 	. "github.com/pspaces/gospace"
 	"math/rand"
@@ -24,6 +25,6 @@ func Capteur_h2o(ts *Space, etatPompe *string) {
 	valeur_h2o := get_valeur_h2o(*etatPompe)
 	ts.Put("niveau_h2o", valeur_h2o)
 	fmt.Print("Capteur_h2o: ", valeur_h2o, "\n")
-	time.Sleep(5 * time.Second)
+	time.Sleep(global.WaitTime)
 	Capteur_h2o(ts, etatPompe)
 }
