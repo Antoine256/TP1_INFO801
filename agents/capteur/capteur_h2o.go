@@ -26,7 +26,7 @@ func get_valeur_h2o(etatPompe string) float64 {
 
 func Capteur_h2o(ts *Space, etatPompe *string) {
 	valeur_h2o := get_valeur_h2o(*etatPompe)
-	global.Out(ts, "niveau_h2o", valeur_h2o)
+	global.Add(ts, "niveau_h2o", valeur_h2o)
 	fmt.Print("Capteur_h2o: ", valeur_h2o, "\n")
 	time.Sleep(global.WaitTime)
 	Capteur_h2o(ts, etatPompe)
