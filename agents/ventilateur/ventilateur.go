@@ -8,11 +8,11 @@ func Ventilateur(ts *Space, etat *string) {
 	_, errActivation := ts.GetP("activation_ventilateur")
 	_, errDesactivation := ts.GetP("desactivation_ventilateur")
 	if errActivation == nil {
-		*etat = "activée"
+		*etat = "activé"
 		Ventilateur(ts, etat)
 	}
 	if errDesactivation == nil {
-		*etat = "désactivée"
+		*etat = "désactivé"
 		Ventilateur(ts, etat)
 	}
 	Ventilateur(ts, etat)

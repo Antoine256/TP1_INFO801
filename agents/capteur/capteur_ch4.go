@@ -12,7 +12,7 @@ var valeur_CH4 = rand.Float64() * 100
 
 func get_valeur_ch4(etatVentilateur string) float64 {
 	switch etatVentilateur {
-	case "activée":
+	case "activé":
 		valeur_CH4 -= rand.Float64() * 5
 		if valeur_CH4 < 0.0 {
 			valeur_CH4 = 0.0
