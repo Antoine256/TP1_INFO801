@@ -7,6 +7,7 @@ import (
 func Commande_pompe_ventilateur(ts *Space, seuil_ch4 float64, seuil_co float64) {
 	var x float64
 	var y float64
+	ts.Get("h2o_haut_detect")
 	tx, _ := ts.Query("niveau_ch4", &x)
 	x = (tx.GetFieldAt(1)).(float64)
 	ty, _ := ts.Query("niveau_co", &y)

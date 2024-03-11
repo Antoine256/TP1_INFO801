@@ -26,7 +26,7 @@ func get_valeur_co(etatVentilateur string) float64 {
 
 func Capteur_co(ts *Space, etatVentilateur *string) {
 	valeur_CO := get_valeur_co(*etatVentilateur)
-	ts.Put("niveau_co", valeur_CO)
+	global.Out(ts, "niveau_co", valeur_CO)
 	fmt.Print("Capteur_co: ", valeur_CO, "\n")
 	time.Sleep(global.WaitTime)
 	Capteur_co(ts, etatVentilateur)

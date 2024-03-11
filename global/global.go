@@ -2,4 +2,4 @@ package global
 
 import "time"
 
-var WaitTime = 1 * time.Second
+var WaitTime = 3 * time.Second

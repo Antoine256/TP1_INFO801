@@ -28,7 +28,6 @@ func printEtat() {
 func main() {
 	ts := NewSpace("ts")
 
-	ts.Put("detection_gaz_haut")
 	ts.Put("detection_h2o_haut")
 
 	wg.Add(11) // Attendre que tous les processus en parallèle se lancent
