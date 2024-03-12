@@ -10,11 +10,9 @@ import (
 	"fmt"
 	_ "image/color"
 	_ "log"
-	"os"
 	"sync"
 	"time"
 
-	"gioui.org/app"
 	_ "gioui.org/op"
 	_ "gioui.org/text"
 	_ "gioui.org/widget/material"
@@ -29,6 +27,7 @@ var etatVentilateur string
 func printEtat() {
 	fmt.Println("Pompe : " + etatPompe)
 	fmt.Println("Ventilateur : " + etatVentilateur)
+	global.InitInterface(&etatPompe, &etatVentilateur)
 	time.Sleep(global.WaitTime)
 	printEtat()
 }
@@ -53,14 +52,7 @@ func main() {
 
 	go printEtat()
 
-	go func() {
-		w := app.NewWindow()
-		err := global.Run(w, &etatPompe)
-		if err != nil {
-			panic(err)
-		}
-		os.Exit(0)
-	}()
+	//global.InitInterface(&etatPompe, &etatVentilateur)
 
 	wg.Wait()
 }
