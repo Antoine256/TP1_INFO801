@@ -19,5 +19,4 @@ func H2o_bas(ts *Space, seuil_h2o_bas float64) {
 	} else {
 		H2o_bas(ts, seuil_h2o_bas)
 	}
-
 }
