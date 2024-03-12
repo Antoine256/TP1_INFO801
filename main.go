@@ -8,8 +8,16 @@ import (
 	"TP1_INFO801/agents/ventilateur"
 	"TP1_INFO801/global"
 	"fmt"
+	_ "image/color"
+	_ "log"
+	"os"
 	"sync"
 	"time"
+
+	"gioui.org/app"
+	_ "gioui.org/op"
+	_ "gioui.org/text"
+	_ "gioui.org/widget/material"
 )
 import . "github.com/pspaces/gospace"
 
@@ -44,6 +52,15 @@ func main() {
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
 
 	go printEtat()
+
+	go func() {
+		w := app.NewWindow()
+		err := global.Run(w, &etatPompe)
+		if err != nil {
+			panic(err)
+		}
+		os.Exit(0)
+	}()
 
 	wg.Wait()
 }
