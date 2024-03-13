@@ -8,9 +8,13 @@ import (
 	"TP1_INFO801/agents/ventilateur"
 	"TP1_INFO801/global"
 	"fmt"
+	"log"
+	"net/http"
+	_ "net/http"
 	"sync"
 	"time"
 )
+
 import . "github.com/pspaces/gospace"
 
 var wg sync.WaitGroup
@@ -26,6 +30,13 @@ func printEtat() {
 }
 
 func main() {
+
+	// Socket !
+
+	http.HandleFunc("/", global.Handler)
+	fmt.Println("Server listening on :8081")
+	//--------------------
+
 	ts := NewSpace("ts")
 
 	ts.Put("detection_h2o_haut")
@@ -44,6 +55,9 @@ func main() {
 	go agents.Commande_pompe_ventilateur(&ts, 50.0, 50.0)
 
 	go printEtat()
+
+	go global.HandleWrites()
+	go log.Fatal(http.ListenAndServe(":8081", nil))
 
 	wg.Wait()
 }
