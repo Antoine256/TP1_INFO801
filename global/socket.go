@@ -46,6 +46,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			return
 		}
+
+		if EtatVentilateur == "activé" {
+			SendToConn("Ventilateur activé")
+		} else {
+			SendToConn("Ventilateur désactivé")
+		}
+		if EtatPompe == "activée" {
+			SendToConn("Pompe activée")
+		} else {
+			SendToConn("Pompe désactivée")
+		}
 	}
 }
 
